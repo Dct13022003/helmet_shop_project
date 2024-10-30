@@ -1,0 +1,18 @@
+.form-group {
+    position: relative;
+}
+
+.fa-eye,
+.fa-eye-slash {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.form-group input[type="password"]~.fa-eye {
+    display: none;
+}
+
+.form-group input[type="text"]~.fa-eye-slash {
+    display: none;
+}
