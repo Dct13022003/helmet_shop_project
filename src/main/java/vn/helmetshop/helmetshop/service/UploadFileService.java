@@ -5,6 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.io.BufferedOutputStream;
 
 import jakarta.servlet.ServletContext;
@@ -45,6 +47,24 @@ public class UploadFileService {
             e.printStackTrace();
         }
         return finalName;
+
+    }
+
+    public boolean handleDeleteFile(String fileName, String targetFolder) {
+        if (fileName != null) {
+            String rootPath = this.servletContext.getRealPath("/resources/images") + File.separator + targetFolder;
+            System.out.println(rootPath);
+            Path file = Path.of(rootPath, fileName);
+            System.out.println(file);
+            try {
+                Files.deleteIfExists(file);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return false;
 
     }
 }

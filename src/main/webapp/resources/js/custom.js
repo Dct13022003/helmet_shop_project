@@ -8,3 +8,6 @@ function changeTypePassword2() {
     let password2 = document.getElementById('exampleRepeatPassword');
     password2.type = password2.type == 'text' ? 'password' : 'text';
 }
+
+
+

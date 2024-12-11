@@ -23,14 +23,6 @@ public class Image {
     public Image() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getName_image() {
         return name_image;
     }
@@ -46,5 +38,5 @@ public class Image {
     public void setProduct(Product product) {
         this.product = product;
     }
-    
+
 }

@@ -1,6 +1,6 @@
 package vn.helmetshop.helmetshop.domain;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -16,8 +16,10 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String description;
-    private String icon;
+    private String name;
+    private String thumbnail;
+    private String banner;
+    private boolean status;
     private Timestamp created_at;
     private Timestamp updated_at;
 
@@ -31,24 +33,44 @@ public class Category {
         return id;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    public Timestamp getUpdated_at() {
+        return updated_at;
     }
 
     public Timestamp getCreated_at() {
@@ -67,12 +89,12 @@ public class Category {
         this.updated_at = updated_at;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
 }

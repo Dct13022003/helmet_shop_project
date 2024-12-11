@@ -19,9 +19,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String status;
-    private long totalprice;
+    private Double totalPrice;
     private String address;
+    private String firstName;
+    private String lastName;
+    private String emailAddress;
     private String phone;
+    private String notice;
     private Timestamp create_at;
     private Timestamp update_at;
     @ManyToOne
@@ -32,6 +36,38 @@ public class Order {
     private List<OrderDetail> orderDetails;
 
     public Order() {
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getNotice() {
+        return notice;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
     }
 
     public long getId() {
@@ -50,12 +86,12 @@ public class Order {
         this.status = status;
     }
 
-    public long getTotalprice() {
-        return totalprice;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotalprice(long totalprice) {
-        this.totalprice = totalprice;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public String getAddress() {
@@ -105,5 +141,8 @@ public class Order {
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
+
+   
+   
 
 }

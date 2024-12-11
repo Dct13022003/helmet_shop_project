@@ -1,5 +1,6 @@
 package vn.helmetshop.helmetshop.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +19,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -48,6 +50,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Feedback> feedbacks;
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
     private Timestamp created_at;
     private Timestamp updated_at;
@@ -157,5 +162,13 @@ public class User {
     }
 
     public User() {
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

@@ -23,17 +23,6 @@
                 <!-- Custom styles for this template-->
                 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="/css/custom.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-                <script>
-                    $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
-                        avatarFile.change(function (e) {
-                            const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#previewAvatar").attr("src", imgURL);
-                        });
-                    });
-                </script>
 
             </head>
 
@@ -57,7 +46,7 @@
                             <!-- Begin Page Content -->
                             <div class="container-fluid">
                                 <form:form class="user" method="POST" action="/admin/user/create"
-                                    modelAttribute="newUser" enctype="multipart/form-data">
+                                    modelAttribute="newUser" enctype="multipart/form-data" id="form-1">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="card text-center">
@@ -92,72 +81,78 @@
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                                            <c:set var="firstNameError">
+                                                            <!-- <c:set var="firstNameError">
                                                                 <form:errors path="firstName"
                                                                     cssClass="invalid-feedback" />
-                                                            </c:set>
+                                                            </c:set> -->
                                                             <form:input type="text"
-                                                                class="form-control form-control-user ${not empty firstNameError? 'is-invalid':''}"
-                                                                id="exampleFirstName" placeholder="First Name"
+                                                                class="form-control form-control-user"
+                                                                id="exampleInputFirstName" placeholder="First Name"
                                                                 path="firstName" />
-                                                            ${firstNameError}
+                                                            <span class="form-message"></span>
+                                                            <!-- ${firstNameError} -->
 
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <c:set var="lastNameError">
+                                                            <!-- <c:set var="lastNameError">
                                                                 <form:errors path="lastName"
                                                                     cssClass="invalid-feedback" />
-                                                            </c:set>
+                                                            </c:set> -->
                                                             <form:input type="text"
-                                                                class="form-control form-control-user ${not empty lastNameError? 'is-invalid':''}"
-                                                                id="exampleLastName" placeholder="Last Name"
+                                                                class="form-control form-control-user"
+                                                                id="exampleInputLastName" placeholder="Last Name"
                                                                 path="lastName" />
-                                                            ${lastNameError}
+                                                            <span class="form-message"></span>
+                                                            <!-- ${lastNameError} -->
 
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <c:set var="addressError">
+                                                        <!-- <c:set var="addressError">
                                                             <form:errors path="address" cssClass="invalid-feedback" />
-                                                        </c:set>
-                                                        <form:input type="text"
-                                                            class="form-control form-control-user ${not empty addressError? 'is-invalid':''}"
+                                                        </c:set> -->
+                                                        <form:input type="text" class="form-control form-control-user "
                                                             id="exampleInputAddress" placeholder="Address"
                                                             path="address" />
-                                                        ${addressError}
+                                                        <span class="form-message"></span>
+                                                        <!-- ${addressError} -->
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                                            <c:set var="emailError">
+                                                            <!-- <c:set var="emailError">
                                                                 <form:errors path="email" cssClass="invalid-feedback" />
-                                                            </c:set>
+                                                            </c:set> -->
                                                             <form:input type="email"
-                                                                class="form-control-user form-control ${not empty emailError? 'is-invalid':''} "
+                                                                class="form-control-user form-control "
                                                                 id="exampleInputEmail" placeholder="Email Address"
                                                                 path="email" />
-                                                            ${emailError}
+                                                            <span class="form-message"></span>
+                                                            <!-- ${emailError} -->
 
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <form:input type="tel"
-                                                                class="form-control form-control-user" id="examplePhone"
-                                                                placeholder="Phone Number" path="phone" />
-                                                            <form:errors path="phone" />
+                                                                class="form-control form-control-user"
+                                                                id="exampleInputPhone" placeholder="Phone Number"
+                                                                path="phone" />
+                                                            <span class="form-message"></span>
+
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                                            <c:set var="passwordError">
+                                                            <!-- <c:set var="passwordError">
                                                                 <form:errors path="password"
                                                                     cssClass="invalid-feedback" />
-                                                            </c:set>
+                                                            </c:set> -->
                                                             <form:input type="password"
-                                                                class="form-control form-control-user ${not empty passwordError? 'is-invalid':''}"
+                                                                class="form-control form-control-user "
                                                                 id="exampleInputPassword" placeholder="Password"
                                                                 path="password" />
-                                                            ${passwordError}
+                                                            <!-- ${passwordError} -->
+                                                            <span class="form-message"></span>
                                                             <i class="fas fa-eye" onclick="changeTypePassword1()"></i>
                                                             <i class="fas fa-eye-slash"
                                                                 onclick="changeTypePassword1()"></i>
@@ -237,6 +232,38 @@
                 <!-- Custom scripts for all pages-->
                 <script src="/js/sb-admin-2.min.js"></script>
                 <script src="/js/custom.js"></script>
+                <script src="/js/validated.js"></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Mong muốn của chúng ta
+                        Validator({
+                            form: '#form-1',
+                            formGroupSelector: '.form-group',
+                            errorSelector: '.form-message',
+                            rules: [
+                                Validator.isRequired('#exampleInputFirstName', 'Vui lòng nhập họ của bạn'),
+                                Validator.isRequired('#exampleInputLastName', 'Vui lòng nhập tên của bạn'),
+                                Validator.isRequired('#exampleInputAddress'),
+                                Validator.isEmail('#exampleInputEmail'),
+                                Validator.minLength('#exampleInputPassword', 8),
+                                Validator.isPhoneVietNamese('#exampleInputPhone')
+                            ],
+                          
+                        });
+                    });
+
+                </script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#previewAvatar").attr("src", imgURL);
+                        });
+                    });
+                </script>
             </body>
 
             </html>

@@ -16,3 +16,14 @@
 .form-group input[type="text"]~.fa-eye-slash {
     display: none;
 }
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+    border-color: #e74a3b;
+    background-image: none;
+}
+
+/* Kiểu dáng chung */
+
+
+
